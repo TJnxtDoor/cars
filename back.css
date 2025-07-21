@@ -1,0 +1,25 @@
+body {
+    
+}
+
+h2 {
+    text-align:center;
+}
+.model {
+    text-align:left;
+    size:20px;
+    color:black;
+    font-weight:bolder;
+    
+}
+
+.BG {
+     text-align:left;
+    size:30px;
+    color:black;
+    font-weight:bolder;
+}
+
+img {
+    margin:0px;
+}
