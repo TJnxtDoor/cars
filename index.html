@@ -1,44 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Car Page</title>
-    <link rel="stylesheet" href="back.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Collection</title>
+    <style>
+        /* ====== General Styles ====== */
+        :root {
+            --primary-color: #d40000;
+            --secondary-color: #1a1a1a;
+            --accent-color: #ff6600;
+            --light-bg: #f5f5f5;
+            --text-color: #333;
+            --white: #ffffff;
+            --aston-green: #005f40;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            background-color:black;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin: 1.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ====== Cars Container ====== */
+        .cars-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .car-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .car-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .car-section img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ====== Car Specs ====== */
+        #ferrari-specs, #bugatti-specs, #aston-specs {
+            padding: 1.5rem;
+        }
+
+        #FR, #BG, #AM {
+            font-size: 1.75rem;
+            margin: 0 0 1rem 0;
+            font-weight: 700;
+        }
+
+        #FR {
+            color: var(--primary-color);
+        }
+
+        #BG {
+            color: #000;
+        }
+
+        #AM {
+            color: var(--aston-green);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        nav ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1.1rem;
+        }
+
+        nav ul li:last-child {
+            border-bottom: none;
+        }
+
+        #description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+            color: #555;
+        }
+
+        /* ====== Responsive Design ====== */
+        @media (min-width: 768px) {
+            .cars-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .car-section img {
+                height: 300px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .cars-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .car-section img {
+                height: 250px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>CARS</h1>
-    <h2>Bugatti</h2>
-    <h2>Ferrari</h2>
-    <p id="BG">Bugatti Chiron</p>
-    <p id="FR">Ferrari 488 GTB</p>
-    
-    <img src="ferrari.jpg" alt="Ferrari 488 GTB" height="400px" width="700px">
-    <p id="specs">
-        <nav>
-            <ul>
-                <li>3.9-liter twin-turbo V8 engine</li>
-                <li>Horsepower: 660</li>
-                <li>Transmission: rear-wheel drive</li>
-            </ul>
-        </nav>
-    </p>
-
-    <img src="bugatti.jpg" alt="Bugatti Chiron" height="400px" width="700px">
-    <p id="specs">
-        <nav>
-            <ul>
-                <li>quad-turbocharged 8.0-liter</li>
-                <li>W16 engine</li>
-                <li>Horsepower: 1500</li>
-    <li>Transmission: all-wheel drive</li>
-</ul>
-<p id ="description"> The Bugatti Chiron is a luxury hypercar known for its exceptional performance and advanced technology.</p>
-        </nav>
-    </p>
-</body> 
+    <h1Car Collection></h1>
+    <div class="cars-container">
+        <div class="car-section">
+            <img src="ferari.jpg" alt="Ferrari 488 GTB">
+            <div id="ferrari-specs">
+                <p id="FR">Ferrari 488 GTB</p>
+                <nav>
+                    <ul>
+                        <li><strong>Engine:</strong> 3.9-liter twin-turbo V8</li>
+                        <li><strong>Horsepower:</strong> 660 hp</li>
+                        <li><strong>Drive:</strong> Rear-wheel drive</li>
+                        <li><strong>0-60 mph:</strong> 3.0 seconds</li>
+                        <li><strong>Top Speed:</strong> 205 mph</li>
+                    </ul>
+                </nav>
+                <p id="description">The Ferrari 488 GTB is a mid-engine sports car that represents the pinnacle of Italian automotive engineering, offering breathtaking performance and stunning design.</p>
+            </div>
+        </div>
+        
+        <div class="car-section">
+            <img src="bugatti.jpg" alt="Bugatti Chiron">
+            <div id="bugatti-specs">
+                <p id="BG">Bugatti Chiron</p>
+                <nav>
+                    <ul>
+                        <li><strong>Engine:</strong> Quad-turbo 8.0L W16</li>
+                        <li><strong>Horsepower:</strong> 1,500 hp</li>
+                        <li><strong>Drive:</strong> All-wheel drive</li>
+                        <li><strong>0-60 mph:</strong> 2.4 seconds</li>
+                        <li><strong>Top Speed:</strong> 261 mph (limited)</li>
+                    </ul>
+                </nav>
+                <p id="description">The Bugatti Chiron redefines hypercar performance with its revolutionary engineering, unparalleled luxury, and record-breaking speed capabilities.</p>
+            </div>
+        </div>
+        
+        <div class="car-section">
+            <img src="2025 aston martinv antage.jpg" alt="Aston Martin DB5 Vintage">
+            <div id="aston-specs">
+                <p id="AM">Aston Martin DB5</p>
+                <nav>
+                    <ul>
+                        <li><strong>Engine:</strong> 4.0-liter inline-6</li>
+                        <li><strong>Horsepower:</strong> 282 hp</li>
+                        <li><strong>Drive:</strong> Rear-wheel drive</li>
+                        <li><strong>0-60 mph:</strong> 8.0 seconds</li>
+                        <li><strong>Top Speed:</strong> 145 mph</li>
+                        <li><strong>Year:</strong> 1964</li>
+                    </ul>
+                </nav>
+                <p id="description">The iconic Aston Martin DB5, made famous by James Bond, represents British automotive elegance with its timeless design and superb craftsmanship from the golden age of motoring.</p>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
-
-
-
-                <!----<p id ="description"> The Ferrari 488 GTB is a high-performance sports car that combines stunning design with cutting-edge technology.</p>-->
