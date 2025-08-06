@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Montserrat', 'Arial', sans-serif;
-            background-color:black;
+            background-color: black;
             margin: 0;
             padding: 0;
             color: var(--text-color);
@@ -106,6 +106,65 @@
             color: #555;
         }
 
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .payment-button {
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-button:hover {
+            background-color: #333;
+        }
+
+        .payment-button.visa {
+            background-color: #1a1a1a;
+        }
+
+        .payment-button.mastercard {
+            background-color: #1a1a1a;
+        }
+
+        .payment-button i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--primary-color);
+        }
+
+        .card-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .card-icon {
+            height: 30px;
+            width: auto;
+        }
+
         @media (min-width: 768px) {
             .cars-container {
                 grid-template-columns: repeat(2, 1fr);
@@ -126,14 +185,16 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h1>Car Collection></h1>
+    <h1>Car Collection</h1>
     <div class="cars-container">
         <div class="car-section">
             <img src="ferari.jpg" alt="Ferrari 488 GTB">
             <div id="ferrari-specs">
                 <p id="FR">Ferrari 488 GTB</p>
+                <div class="price">$250,000</div>
                 <nav>
                     <ul>
                         <li><strong>Engine:</strong> 3.9-liter twin-turbo V8</li>
@@ -143,8 +204,19 @@
                         <li><strong>Top Speed:</strong> 205 mph</li>
                     </ul>
                 </nav>
-                <p id="description">The Ferrari 488 GTB is a mid-engine sports car that represents
-                     the pinnacle of Italian automotive engineering, offering breathtaking performance and stunning design.</p>
+                <p id="description">The Ferrari 488 GTB is a mid-engine sports car that represents the pinnacle of Italian automotive engineering, offering breathtaking performance and stunning design.</p>
+                <div class="payment-options">
+                    <button class="payment-button visa" onclick="initiatePayment('Ferrari 488 GTB', 250000)">
+                        <i class="fab fa-cc-visa"></i> Pay with Visa
+                    </button>
+                    <button class="payment-button mastercard" onclick="initiatePayment('Ferrari 488 GTB', 250000)">
+                        <i class="fab fa-cc-mastercard"></i> Pay with Mastercard
+                    </button>
+                    <div class="card-icons">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="card-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="card-icon">
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -152,6 +224,7 @@
             <img src="bugatti.jpg" alt="Bugatti Chiron">
             <div id="bugatti-specs">
                 <p id="BG">Bugatti Chiron</p>
+                <div class="price">$3,000,000</div>
                 <nav>
                     <ul>
                         <li><strong>Engine:</strong> Quad-turbo 8.0L W16</li>
@@ -161,8 +234,19 @@
                         <li><strong>Top Speed:</strong> 261 mph (limited)</li>
                     </ul>
                 </nav>
-                <p id="description">The Bugatti Chiron redefines hypercar performance with its revolutionary 
-                                engineering, unparalleled luxury, and record-breaking speed capabilities.</p>
+                <p id="description">The Bugatti Chiron redefines hypercar performance with its revolutionary engineering, unparalleled luxury, and record-breaking speed capabilities.</p>
+                <div class="payment-options">
+                    <button class="payment-button visa" onclick="initiatePayment('Bugatti Chiron', 3000000)">
+                        <i class="fab fa-cc-visa"></i> Pay with Visa
+                    </button>
+                    <button class="payment-button mastercard" onclick="initiatePayment('Bugatti Chiron', 3000000)">
+                        <i class="fab fa-cc-mastercard"></i> Pay with Mastercard
+                    </button>
+                    <div class="card-icons">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="card-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="card-icon">
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -170,6 +254,7 @@
             <img src="2025 aston martinv antage.jpg" alt="Aston Martin DB5 Vintage">
             <div id="aston-specs">
                 <p id="AM">Aston Martin DB5</p>
+                <div class="price">$1,200,000</div>
                 <nav>
                     <ul>
                         <li><strong>Engine:</strong> 4.0-liter inline-6</li>
@@ -179,24 +264,41 @@
                         <li><strong>Top Speed:</strong> 145 mph</li>
                     </ul>
                 </nav>
-                <p id="description">The iconic Aston Martin DB5, made famous by James Bond, represents British automotive elegance 
-                                    with its timeless design and superb craftsmanship from the golden age of motoring.</p>
+                <p id="description">The iconic Aston Martin DB5, made famous by James Bond, represents British automotive elegance with its timeless design and superb craftsmanship from the golden age of motoring.</p>
+                <div class="payment-options">
+                    <button class="payment-button visa" onclick="initiatePayment('Aston Martin DB5', 1200000)">
+                        <i class="fab fa-cc-visa"></i> Pay with Visa
+                    </button>
+                    <button class="payment-button mastercard" onclick="initiatePayment('Aston Martin DB5', 1200000)">
+                        <i class="fab fa-cc-mastercard"></i> Pay with Mastercard
+                    </button>
+                    <div class="card-icons">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="card-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="card-icon">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+    function initiatePayment(item, price) {
+        // In a real implementation, this would connect to a payment processor
+        // For demonstration, we'll just show a confirmation dialog
+        const formattedPrice = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(price);
+        
+        if (confirm(`Initiate payment for ${item} at ${formattedPrice}?`)) {
+            // This is where you would integrate with your payment gateway
+            // For example: Stripe, PayPal, etc.
+            alert('Payment processing would be handled here in a real implementation.\n\nRedirecting to payment gateway...');
+            
+            // In a real app, you would redirect to a payment page or show a payment form
+            // window.location.href = `/checkout?item=${encodeURIComponent(item)}&price=${price}`;
+        }
+    }
+    </script>
 </body>
-<script crossorigin="src=https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js">
-    ApplePayButton.on('ready', () => {
-        const button = ApplePayButton.create({
-            style: 'black',
-            type: 'buy',
-            onClick: () => {
-                console.log('Apple Pay button clicked');
-            }
-        });
-        document.body.appendChild(button);
-    });
-</script>
-
-</script>
-
+</html>
