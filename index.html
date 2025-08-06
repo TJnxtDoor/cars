@@ -185,4 +185,18 @@
         </div>
     </div>
 </body>
-</html>
+<script crossorigin="src=https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js">
+    ApplePayButton.on('ready', () => {
+        const button = ApplePayButton.create({
+            style: 'black',
+            type: 'buy',
+            onClick: () => {
+                console.log('Apple Pay button clicked');
+            }
+        });
+        document.body.appendChild(button);
+    });
+</script>
+
+</script>
+
