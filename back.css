@@ -1,11 +1,11 @@
-
 :root {
-  --primary-color: #d40000; 
+  --primary-color: #d40000;
   --secondary-color: #1a1a1a;
   --accent-color: #ff6600;
   --light-bg: #f5f5f5;
   --text-color: #333;
   --white: #ffffff;
+  --aston-green: #005f40;
 }
 
 body {
@@ -17,235 +17,128 @@ body {
   line-height: 1.6;
 }
 
-.header {
-  background-color: var(--secondary-color);
-  color: var(--white);
-  padding: 1.5rem 0;
+h1 {
   text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.logo {
-  font-size: 2.25rem; 
-  font-weight: 700;
-  margin-bottom: 0.75rem;
+  font-size: 2.5rem;
   color: var(--primary-color);
-  letter-spacing: 1px;
-}
-
-.navbar {
-  display: flex;
-  justify-content: center;
-  background-color: var(--secondary-color);
-  padding: 1rem 0;
-}
-
-.navbar a {
-  color: var(--white);
-  text-decoration: none;
-  margin: 0 1.25rem;
-  font-weight: 600;
-  font-size: 1.125rem; 
-  transition: color 0.3s ease;
-  position: relative;
-}
-
-.navbar a:hover {
-  color: var(--accent-color);
-}
-
-.navbar a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: var(--primary-color);
-  transition: width 0.3s ease;
-}
-
-.navbar a:hover::after {
-  width: 100%;
-}
-
-.vehicle-container {
-  max-width: 75rem; 
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background-color: var(--white);
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-}
-
-#model {
-  font-size: 1.75rem; 
-  color: var(--primary-color);
-  font-weight: 700;
-  margin-bottom: 0.625rem;
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 0.3125rem;
+  margin: 1.5rem 0;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-#BG, #FR {
-  font-size: 1.5rem; 
-  font-weight: 700;
-  color: var(--secondary-color);
-  margin: 1rem 0 0.625rem 0;
-}
-
-#description {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  margin-bottom: 1.25rem;
-}
-
-.ferrari-specs {
-  text-align: center;
-  margin: 1.25rem 0;
-  padding: 1rem;
-  background-color: rgba(212, 0, 0, 0.05);
-  border-radius: 0.5rem;
-  border-left: 4px solid var(--primary-color);
-}
-
-.ferrari-specs h3 {
-  font-size: 1.375rem; 
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-}
-
-
-
-.specs-grid {
+.cars-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  text-align: left;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 
-.spec-item {
-  padding: 0.5rem;
-}
-
-.spec-item strong {
-  color: var(--primary-color);
-}
-
-.car-image {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 1.25rem auto;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+.car-section {
+  background-color: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
-.car-image:hover {
-  transform: scale(1.02);
+.car-section:hover {
+  transform: translateY(-5px);
 }
 
-.image-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
+.car-section img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
 }
 
-.cta-container {
-  text-align: center;
-  margin: 2rem 0;
+#ferrari-specs, #bugatti-specs, #aston-specs {
+  padding: 1.5rem;
 }
 
-.cta-button {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: var(--white);
-  padding: 0.75rem 1.875rem;
-  font-size: 1.125rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 0.5rem;
-  margin: 1.25rem 0;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+#FR, #BG, #AM {
+  font-size: 1.75rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
 }
 
-.cta-button:hover {
-  background-color: transparent;
+#FR {
   color: var(--primary-color);
-  border-color: var(--primary-color);
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(212, 0, 0, 0.3);
 }
 
-.footer {
-  background-color: var(--secondary-color);
-  color: var(--white);
-  text-align: center;
-  padding: 2rem 0;
-  margin-top: 3rem;
+#BG {
+  color: #000;
 }
 
-.footer-content {
-  max-width: 75rem;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  text-align: left;
-  padding: 0 1.5rem;
+#AM {
+  color: var(--aston-green);
 }
 
-.footer-section h3 {
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0;
 }
 
-.footer-bottom {
-  margin-top: 2rem;
+nav ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 1.1rem;
+}
+
+nav ul li:last-child {
+  border-bottom: none;
+}
+
+#description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+  color: #555;
+}
+
+.payment-options {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  border-top: 1px solid #eee;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    padding: 0.5rem 0;
+.apple-pay-button {
+  display: none;
+  width: 90%;
+  height: 45px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: var(--primary-color);
+}
+
+@media (min-width: 768px) {
+  .cars-container {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .navbar a {
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-  }
-  
-  #model {
-    font-size: 1.5rem;
-  }
-  
-  .specs-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    text-align: center;
+  .car-section img {
+    height: 300px;
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.vehicle-container {
-  animation: fadeIn 0.6s ease-out;
+@media (min-width: 1024px) {
+  .cars-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .car-section img {
+    height: 250px;
+  }
 }
