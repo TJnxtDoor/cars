@@ -9,18 +9,23 @@ function onApplePayButtonClicked() {
         "countryCode": "US",
         "currencyCode": "USD",
         "merchantCapabilities": [
-            "supports3DS"
+            "supports3DS",
+            "requiresCardholderName",
+            "supportsCredit",
+            "supportsDebit"
+            
         ],
         "supportedNetworks": [
             "visa",
             "masterCard",
             "amex",
-            "discover"
+            "discover",
         ],
+        
         "total": {
-            "label": "Demo (Card is not charged)",
+            "label": "null",
             "type": "final",
-            "amount": "1.99"
+            "amount": "${total}"
         }
     };
     
@@ -28,21 +33,20 @@ function onApplePayButtonClicked() {
     const session = new ApplePaySession(3, request);
     
     session.onvalidatemerchant = async event => {
-        // Call your own server to request a new merchant session.
+        // Validate merchant by making a request to the merchant's server. 
         const merchantSession = await validateMerchant();
         session.completeMerchantValidation(merchantSession);
     };
     
     session.onpaymentmethodselected = event => {
         // Define ApplePayPaymentMethodUpdate based on the selected payment method.
-        // No updates or errors are needed, pass an empty object.
         const update = {};
         session.completePaymentMethodSelection(update);
     };
     
     session.onshippingmethodselected = event => {
         // Define ApplePayShippingMethodUpdate based on the selected shipping method.
-        // No updates or errors are needed, pass an empty object. 
+        
         const update = {};
         session.completeShippingMethodSelection(update);
     };
