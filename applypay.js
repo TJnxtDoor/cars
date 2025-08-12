@@ -3,6 +3,8 @@ function onApplePayButtonClicked() {
     if (!ApplePaySession) {
         return;
     }
+
+    
     
     // Define ApplePayPaymentRequest
     const request = {

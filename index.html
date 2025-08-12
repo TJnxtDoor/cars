@@ -82,9 +82,10 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const applePayButtons = document.querySelectorAll('.apple-pay-button');
-        
+
+            button.style.setProperty('-webkit-appearance', '-apple-pay-button');
+            button.style.setProperty('-apple-pay-button-type', 'buy');
+            button.style.setProperty('-apple-pay-button-style', 'black');
         // Checks if Apple Pay is available
         if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
             applePayButtons.forEach(button => {
@@ -140,8 +141,7 @@
             };
 
             session.begin();
-        }
-    });
+        };
     </script>
 </body>
 </html>
