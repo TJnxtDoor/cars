@@ -10,7 +10,6 @@
 
 .FR{
   width: 100%;
-  aspect-ratio: 16/9;
   object-fit: cover;
   display: block;
   border-bottom: 1px solid #eee;
@@ -36,6 +35,8 @@ h1 {
 
 #FR, #BG, #AM {
   font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+  width: fit-content;
+  height: fit-content;
 }
 
 .price {
