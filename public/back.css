@@ -1,0 +1,87 @@
+.cars-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start; 
+}
+
+.FR{
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+@media (min-width: 1024px) {
+  .car-section.ferrari {
+    grid-column: span 3;
+  }
+}
+
+.car-section img {
+  width: 100%;
+  aspect-ratio: 16/9;   
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+#FR, #BG, #AM {
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+}
+
+.price {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+.payment-options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.payment-options img {
+  height: 30px;
+  width: auto;
+}
+
+.apple-pay-button {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.apple-pay-button:hover {
+  background-color: #333;
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cars-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cars-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
