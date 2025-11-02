@@ -6,3 +6,5 @@ have a passion everything that is car related, and my project will be about,  pa
  fixed issues where the website couldnt load images and text
  orginized files into folders 
  all api keys are hidden 
+ apple pay inttergration QR Payment Process 
+ 

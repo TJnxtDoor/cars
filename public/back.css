@@ -75,7 +75,28 @@ h1 {
 }
 
 
+/* Base layout for mobile-first approach */
+.cars-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem; 
+}
+
+/* Tablet layout: 2 columns */
 @media (min-width: 768px) and (max-width: 1023px) {
+  .cars-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop layout: 3 columns */
+@media (min-width: 1024px) {
+  .cars-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* @media (min-width: 768px) and (max-width: 1023px) {
   .cars-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -85,4 +106,4 @@ h1 {
   .cars-container {
     grid-template-columns: repeat(3, 1fr);
   }
-}
+} */
