@@ -1,5 +1,6 @@
 // Select all Apple Pay buttons
-const applePayButtons = document.querySelectorAll('.apple-pay-button');
+let applePayButtons = document.querySelectorAll('.apple-pay-button');
+applePayButtons = []; // sets emty arrays if the was previously declared with (let, var or const) 
 
 // Function to initiate the Apple Pay session
 function initiateApplePay(event) {
@@ -59,6 +60,8 @@ function initiateApplePay(event) {
     session.begin();
 }
 
+
+const sd = {}
 // Check if Apple Pay is available
 if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
     applePayButtons.forEach(button => {

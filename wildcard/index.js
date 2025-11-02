@@ -1,7 +1,5 @@
-/* jshint node: true */
 'use strict';
-
-var REGEXP_PARTS = /(\*|\?)/g;
+var REGEXP_PARTS = /(\*|\?)/g; // indetify wildcard character for file matching and pattern parsring (seach filters or globally patterns)
 
 /**
   # wildcard
@@ -34,6 +32,17 @@ var REGEXP_PARTS = /(\*|\?)/g;
 
      A well cared for and loved JS wildcard matcher.
 **/
+
+
+// Apple Pay Handle
+function handleApplePay(button) {
+  const item = button.getAttribute('data-item');
+  const price = button.getAttribute('data-price');
+}
+
+//logs item and prices
+console.log(`Initiating Apple Pay for ${item} at $${price}`);
+
 
 function WildcardMatcher(text, separator) {
   this.text = text = text || '';
@@ -93,8 +102,7 @@ WildcardMatcher.prototype.match = function(input) {
 };
 
 WildcardMatcher.prototype.classifyPart = function(part) {
-  // in the event that we have been provided a part that is not just a wildcard
-  // then turn this into a regular expression for matching purposes
+
   if (part === '*') {
     return part;
   } else if (part.indexOf('*') >= 0 || part.indexOf('?') >= 0) {

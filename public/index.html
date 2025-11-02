@@ -4,88 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Car Collection</title>
   <link rel="stylesheet" href="back.css">
 </head>
-<script>
-
-  if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
-    document.querySelector('.apple-pay-button').addEventListener('click', () => {
-      const request = {
-        countryCode: 'US',
-        currencyCode: 'USD',
-        supportedNetworks: ['visa', 'masterCard', 'amex'],
-        merchantCapabilities: ['supports3DS'],
-        total: {
-          label: 'Austin Martin',
-          amount: '600000.00'
-        }
-      };
-
-      const session = new ApplePaySession(3, request);
-
-      session.onvalidatemerchant = (event) => {
-        fetch('/validate-merchant', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ validationURL: event.validationURL })
-        })
-          .then(res => res.json())
-          .then(data => session.completeMerchantValidation(data));
-      };
-
-      session.onpaymentauthorized = (event) => {
-        // You would send event.payment to your server here
-        session.completePayment(ApplePaySession.STATUS_SUCCESS);
-      };
-
-      session.begin();
-    });
-  }
-  if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
-    document.querySelector('.apple-pay-button').addEventListener('click', () => {
-      const request = {
-        countryCode: 'US',
-        currencyCode: 'USD',
-        supportedNetworks: ['visa', 'masterCard', 'amex'],
-        merchantCapabilities: ['supports3DS'],
-        total: {
-          label: 'Austin Martin',
-          amount: '600000'
-        }
-      };
-
-      const session = new ApplePaySession(3, request);
-
-      session.onvalidatemerchant = (event) => {
-        // Call your server to validate the merchant
-        fetch('/validate-merchant', {
-          method: 'POST',
-          body: JSON.stringify({ validationURL: event.validationURL })
-        })
-          .then(response => response.json())
-          .then(data => session.completeMerchantValidation(data));
-      };
-
-      session.onpaymentauthorized = (event) => {
-        // Process payment here
-        session.completePayment(ApplePaySession.STATUS_SUCCESS);
-      };
-
-      session.begin();
-    });
-  }
-</script>
-
-<script>
-  if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
-    console.log("Apple Pay is available");
-  } else {
-    console.log("Apple Pay is not available");
-  }
-</script>
-
 
 <body>
   <h1>Car Collection</h1>
@@ -111,7 +32,7 @@
           Italian automotive engineering, offering breathtaking performance and stunning design.
         </p>
         <div class="payment-options">
-          <button class="apple-pay-button" data-item="Ferrri" data-price="1400000">
+          <button class="apple-pay-button" data-item="Ferrari" data-price="250000">
             Buy with Apple Pay
           </button>
         </div>
@@ -137,7 +58,7 @@
           The Bugatti Chiron redefines hypercar performance with its revolutionary
           engineering, unparalleled luxury, and record-breaking speed capabilities.
         </p>
-        <button class="apple-pay-button" data-item="Bugatti Chiron" data-price="3000000">
+        <button class="apple-pay-button" data-item="Bugatti" data-price="3000000">
           Buy with Apple Pay
         </button>
       </div>
@@ -145,11 +66,10 @@
 
     <!-- Aston Martin -->
     <div class="car-section">
-      <img src="img/Austin Martin.jpg">
+      <img src="img/Austin Martin.jpg" alt="Aston Martin">
       <div id="aston-specs">
         <p id="AM">Aston Martin DB5</p>
         <div class="price">$1,200,000</div>
-
         <nav>
           <ul>
             <li><strong>Engine:</strong> 4.0-liter inline-6</li>
@@ -164,7 +84,7 @@
           automotive elegance with its timeless design and superb craftsmanship from the golden age of motoring.
         </p>
         <div class="payment-options">
-          <button class="apple-pay-button" data-item="Austin Martin" data-price="600000">
+          <button class="apple-pay-button" data-item="Aston Martin" data-price="1200000">
             Buy with Apple Pay
           </button>
         </div>
@@ -172,7 +92,55 @@
     </div>
 
   </div>
-  <script src="/public/apple-pay-integration.js"></script>
+
+  <script>
+    function handleApplePay(button) {
+      const item = button.dataset.item;
+      const price = button.dataset.price;
+
+      if (!window.ApplePaySession || !ApplePaySession.canMakePayments()) {
+        console.log("Apple Pay is not available");
+        return;
+      }
+
+      const request = {
+        countryCode: 'US',
+        currencyCode: 'USD',
+        supportedNetworks: ['visa', 'masterCard', 'amex'],
+        merchantCapabilities: ['supports3DS'],
+        total: { label: item, amount: price }
+      };
+
+      const session = new ApplePaySession(3, request);
+
+      session.onvalidatemerchant = (event) => {
+        fetch('/validate-merchant', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ validationURL: event.validationURL })
+        })
+          .then(res => res.json())
+          .then(data => session.completeMerchantValidation(data));
+      };
+
+      session.onpaymentauthorized = (event) => {
+        // Send event.payment to your server
+        session.completePayment(ApplePaySession.STATUS_SUCCESS);
+        alert(`Payment successful for ${item}!`);
+      };
+
+      session.begin();
+    }
+
+    // Attach handler to all Apple Pay buttons
+    document.querySelectorAll('.apple-pay-button').forEach(btn => {
+      btn.addEventListener('click', () => handleApplePay(btn));
+    });
+  </script>
+
+  <script src="/apple-pay-integration.js"></script>
+  <script src="/apple-pay-session.js"></script>
+  <script src="/applepay.js"></script>
 </body>
 
 </html>
