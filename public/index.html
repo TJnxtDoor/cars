@@ -8,6 +8,84 @@
   <title>Car Collection</title>
   <link rel="stylesheet" href="back.css">
 </head>
+<script>
+
+  if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
+  document.querySelector('.apple-pay-button').addEventListener('click', () => {
+    const request = {
+      countryCode: 'US',
+      currencyCode: 'USD',
+      supportedNetworks: ['visa', 'masterCard', 'amex'],
+      merchantCapabilities: ['supports3DS'],
+      total: {
+        label: 'Austin Martin',
+        amount: '600000.00'
+      }
+    };
+
+    const session = new ApplePaySession(3, request);
+
+    session.onvalidatemerchant = (event) => {
+      fetch('/validate-merchant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ validationURL: event.validationURL })
+      })
+      .then(res => res.json())
+      .then(data => session.completeMerchantValidation(data));
+    };
+
+    session.onpaymentauthorized = (event) => {
+      // You would send event.payment to your server here
+      session.completePayment(ApplePaySession.STATUS_SUCCESS);
+    };
+
+    session.begin();
+  });
+}
+if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
+  document.querySelector('.apple-pay-button').addEventListener('click', () => {
+    const request = {
+      countryCode: 'US',
+      currencyCode: 'USD',
+      supportedNetworks: ['visa', 'masterCard', 'amex'],
+      merchantCapabilities: ['supports3DS'],
+      total: {
+        label: 'Austin Martin',
+        amount: '600000'
+      }
+    };
+
+    const session = new ApplePaySession(3, request);
+
+    session.onvalidatemerchant = (event) => {
+      // Call your server to validate the merchant
+      fetch('/validate-merchant', {
+        method: 'POST',
+        body: JSON.stringify({ validationURL: event.validationURL })
+      })
+      .then(response => response.json())
+      .then(data => session.completeMerchantValidation(data));
+    };
+
+    session.onpaymentauthorized = (event) => {
+      // Process payment here
+      session.completePayment(ApplePaySession.STATUS_SUCCESS);
+    };
+
+    session.begin();
+  });
+}
+</script>
+
+<script>
+  if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
+    console.log("Apple Pay is available");
+  } else {
+    console.log("Apple Pay is not available");
+  }
+</script>
+
 
 <body>
   <h1>Car Collection</h1>
@@ -94,5 +172,6 @@
   </div>
 
   </div>
+<script src="/public/apple-pay-integration.js"></script>
 </body>
 </html>
