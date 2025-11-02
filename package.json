@@ -2,13 +2,13 @@
   "name": "cars",
   "version": "1.0.0",
   "description": "A front-end project detailing the history, models, and specifications of a particular car manufacturer.",
+
+  
   "scripts": {
-    "start": "webpack serve --mode development --open",
-    "dev": "webpack serve --mode development",
-    "build": "webpack --mode production",
-    "serve": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node server.js",
+  "test": "jest"
+},
+
   "keywords": [
     "car",
     "automotive",
@@ -17,16 +17,18 @@
   ],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "path-browserify": "^1.0.1"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "css-loader": "^6.11.0",
     "html-webpack-plugin": "^5.6.0",
+    "jest": "^30.2.0",
     "style-loader": "^3.3.4",
+    "supertest": "^7.1.4",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.2"
