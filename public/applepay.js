@@ -23,36 +23,36 @@ function initiateApplePay(event) {
     const session = new ApplePaySession(3, paymentRequest);
 
     // Merchant validation
-    session.onvalidatemerchant = function(event) {
+    session.onvalidatemerchant = function (event) {
         fetch('/validate-merchant', {
             method: 'POST',
             body: JSON.stringify({ validationURL: event.validationURL }),
             headers: { 'Content-Type': 'application/json' }
         })
-        .then(res => res.json())
-        .then(merchantSession => {
-            session.completeMerchantValidation(merchantSession);
-        });
+            .then(res => res.json())
+            .then(merchantSession => {
+                session.completeMerchantValidation(merchantSession);
+            });
     };
 
     // Payment authorization
-    session.onpaymentauthorized = function(event) {
+    session.onpaymentauthorized = function (event) {
         fetch('/process-payment', {
             method: 'POST',
             body: JSON.stringify({ token: event.payment.token }),
             headers: { 'Content-Type': 'application/json' }
         })
-        .then(res => res.json())
-        .then(result => {
-            if (result.success) {
-                session.completePayment(ApplePaySession.STATUS_SUCCESS);
-            } else {
-                session.completePayment(ApplePaySession.STATUS_FAILURE);
-            }
-        });
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    session.completePayment(ApplePaySession.STATUS_SUCCESS);
+                } else {
+                    session.completePayment(ApplePaySession.STATUS_FAILURE);
+                }
+            });
     };
 
-    session.oncancel = function() {
+    session.oncancel = function () {
         console.log('Apple Pay payment cancelled');
     };
 
@@ -77,28 +77,28 @@ if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
 }
 
 document.querySelector('.apple-pay-button').addEventListener('click', () => {
-  const request = {
-    countryCode: 'US',
-    currencyCode: 'USD',
-    supportedNetworks: ['visa', 'masterCard', 'amex'],
-    merchantCapabilities: ['supports3DS'],
-    total: {
-      label: 'Austin Martin',
-      amount: '600000.00'
-    }
-  };
+    const request = {
+        countryCode: 'US',
+        currencyCode: 'USD',
+        supportedNetworks: ['visa', 'masterCard', 'amex'],
+        merchantCapabilities: ['supports3DS'],
+        total: {
+            label: 'Austin Martin',
+            amount: '600000.00'
+        }
+    };
 
-  const session = new ApplePaySession(3, request);
+    const session = new ApplePaySession(3, request);
 
-  session.onvalidatemerchant = (event) => {
-    console.log('Validating merchant with URL:', event.validationURL);
-    session.completeMerchantValidation({ merchantSession: 'mock-session-data' });
-  };
+    session.onvalidatemerchant = (event) => {
+        console.log('Validating merchant with URL:', event.validationURL);
+        session.completeMerchantValidation({ merchantSession: 'mock-session-data' });
+    };
 
-  session.onpaymentauthorized = (event) => {
-    console.log('Payment authorized:', event.payment);
-    session.completePayment(ApplePaySession.STATUS_SUCCESS);
-  };
+    session.onpaymentauthorized = (event) => {
+        console.log('Payment authorized:', event.payment);
+        session.completePayment(ApplePaySession.STATUS_SUCCESS);
+    };
 
-  session.begin();
+    session.begin();
 });
