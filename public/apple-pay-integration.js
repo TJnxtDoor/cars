@@ -54,18 +54,27 @@ function initiateApplePay(event) {
 
   session.begin();
 }
-
-if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
-  applePayButtons.forEach(button => {
-    button.style.display = 'inline-block';
-    button.style.setProperty('-webkit-appearance', '-apple-pay-button');
-    button.style.setProperty('-apple-pay-button-type', 'buy');
-    button.style.setProperty('-apple-pay-button-style', 'black');
-    button.addEventListener('click', initiateApplePay);
-  });
+if (window.ApplePaySession) {
+  ApplePaySession.canMakePaymentsWithActiveCard('merchant-identifier')
+    .then(canMakePayments => {
+      if (canMakePayments) {
+        applePayButtons.forEach(button => {
+          button.style.display = 'inline-block';
+          button.style.setProperty('-webkit-appearance', '-apple-pay-button');
+          button.style.setProperty('-apple-pay-button-type', 'buy');
+          button.style.setProperty('-apple-pay-button-style', 'black');
+          button.addEventListener('click', initiateApplePay);
+        });
+      } else {
+        applePayButtons.forEach(button => {
+          button.style.display = 'none';
+        });
+        console.log('Apple Pay is not available or no active card configured');
+      }
+    });
 } else {
   applePayButtons.forEach(button => {
     button.style.display = 'none';
   });
-  console.log('Apple Pay is not available or device not configured');
+  console.log('Apple Pay is not supported on this device or browser');
 }

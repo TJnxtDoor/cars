@@ -2,10 +2,7 @@
   "name": "cars",
   "version": "1.0.0",
   "description": "A front-end project detailing the history, models, and specifications of a particular car manufacturer.",
-
-  
   "scripts": {
-    
     "start": "node server.js",
     "test": "jest",
     "type": "module"
@@ -21,7 +18,8 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "path-browserify": "^1.0.1"
+    "path-browserify": "^1.0.1",
+    "serve-favicon": "^2.5.1"
   },
   "devDependencies": {
     "cross-env": "^10.1.0",
