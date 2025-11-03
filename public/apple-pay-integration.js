@@ -1,4 +1,4 @@
-const applePayButtons = document.querySelectorAll('.apple-pay-button');
+let applePayButtons = document.querySelectorAll('.apple-pay-button');
 
 function initiateApplePay(event) {
   const item = event.target.dataset.item;
@@ -18,7 +18,7 @@ function initiateApplePay(event) {
     requiredShippingContactFields: []
   };
 
-  const session = new ApplePaySession(3, paymentRequest);
+  let session = new ApplePaySession(3, paymentRequest);
 
   session.onvalidatemerchant = function (event) {
     fetch('/validate-merchant', {

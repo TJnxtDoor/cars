@@ -4,7 +4,7 @@ function initiateApplePay(event) {
     const item = event.target.dataset.item;
     const price = event.target.dataset.price;
 
-    const paymentRequest = {
+    let paymentRequest = {
         countryCode: 'US',
         currencyCode: 'USD',
         merchantCapabilities: ['supports3DS'],
@@ -18,7 +18,7 @@ function initiateApplePay(event) {
         requiredShippingContactFields: []
     };
 
-    const session = new ApplePaySession(3, paymentRequest);
+    let session = new ApplePaySession(3, paymentRequest);
 
     // Merchant validation
     session.onvalidatemerchant = function (event) {
@@ -88,7 +88,7 @@ document.querySelector('.apple-pay-button').addEventListener('click', () => {
         }
     };
 
-    const session = new ApplePaySession(3, request);
+    let session = new ApplePaySession(3, request);
 
     session.onvalidatemerchant = (event) => {
         console.log('Validating merchant with URL:', event.validationURL);
@@ -103,81 +103,3 @@ document.querySelector('.apple-pay-button').addEventListener('click', () => {
     session.begin();
 });
 
-// tset 
-// Select all Apple Pay buttons
-// const applePayButtons = document.querySelectorAll('.apple-pay-button');
-
-// // Function to initiate the Apple Pay session
-// function initiateApplePay(event) {
-//     const item = event.target.dataset.item || 'Default Item';
-//     const price = event.target.dataset.price || '0.00';
-
-//     const paymentRequest = {
-//         countryCode: 'US',
-//         currencyCode: 'USD',
-//         merchantCapabilities: ['supports3DS'],
-//         supportedNetworks: ['visa', 'masterCard', 'amex', 'discover'],
-//         total: {
-//             label: 'Car Collection: ' + item,
-//             type: 'final',
-//             amount: price
-//         },
-//         requiredBillingContactFields: ['postalAddress'],
-//         requiredShippingContactFields: []
-//     };
-
-//     const session = new ApplePaySession(3, paymentRequest);
-
-//     // Merchant validation
-//     session.onvalidatemerchant = function (event) {
-//         fetch('/validate-merchant', {
-//             method: 'POST',
-//             body: JSON.stringify({ validationURL: event.validationURL }),
-//             headers: { 'Content-Type': 'application/json' }
-//         })
-//             .then(res => res.json())
-//             .then(merchantSession => {
-//                 session.completeMerchantValidation(merchantSession);
-//             });
-//     };
-
-//     // Payment authorization
-//     session.onpaymentauthorized = function (event) {
-//         fetch('/process-payment', {
-//             method: 'POST',
-//             body: JSON.stringify({ token: event.payment.token }),
-//             headers: { 'Content-Type': 'application/json' }
-//         })
-//             .then(res => res.json())
-//             .then(result => {
-//                 if (result.success) {
-//                     session.completePayment(ApplePaySession.STATUS_SUCCESS);
-//                 } else {
-//                     session.completePayment(ApplePaySession.STATUS_FAILURE);
-//                 }
-//             });
-//     };
-
-//     session.oncancel = function () {
-//         console.log('Apple Pay payment cancelled');
-//     };
-
-//     session.begin();
-// }
-
-// // Check if Apple Pay is available
-// if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
-//     applePayButtons.forEach(button => {
-//         button.style.display = 'inline-block';
-//         button.style.setProperty('-webkit-appearance', '-apple-pay-button');
-//         button.style.setProperty('-apple-pay-button-type', 'buy');
-//         button.style.setProperty('-apple-pay-button-style', 'black');
-
-//         button.addEventListener('click', initiateApplePay);
-//     });
-// } else {
-//     console.log('Apple Pay is not available or device not configured');
-//     applePayButtons.forEach(button => {
-//         button.style.display = 'none';
-//     });
-// }
