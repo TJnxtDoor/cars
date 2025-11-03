@@ -1,11 +1,16 @@
-
 const express = require('express');
 const path = require('path');
 const https = require('https');
 const fs = require('fs');
+
 const app = express();
 const PORT = 3000;
 
+// Middleware
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Merchant validation endpoint
 app.post('/validate-merchant', (req, res) => {
   const validationURL = req.body.validationURL;
 
@@ -34,21 +39,16 @@ app.post('/validate-merchant', (req, res) => {
   request.end();
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
-
-app.use(express.static(path.join(__dirname, 'public')));
-
+// Dev route
 app.get('/dev', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Start server
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(` Server running at http://localhost:${PORT}/dev`);
+    console.log(`Server running at http://localhost:${PORT}/dev`);
   });
 }
 
 module.exports = app;
-
-
-app.use(express.static(path.join(__dirname, 'public')));

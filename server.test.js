@@ -1,5 +1,5 @@
-import request from 'supertest';
-import app from './server.js';
+const request = require('supertest');
+const app = require('./server.js');
 
 describe('Car Collection App', () => {
   test('GET /dev returns HTML with Ferrari', async () => {

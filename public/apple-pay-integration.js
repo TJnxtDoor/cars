@@ -1,23 +1,24 @@
-const applePayButtons = document.querySelectorAll('.apple-play-button')
+const applePayButtons = document.querySelectorAll('.apple-pay-button');
 
 function initiateApplePay(event) {
   const item = event.target.dataset.item;
   const price = event.target.dataset.price;
 
   const paymentRequest = {
-    coutryCode: 'US',
+    countryCode: 'US',
     currencyCode: 'USD',
     merchantCapabilities: ['supports3DS'],
-    supportCapabilities: ['visa', 'mastercard', 'amex', 'discover'],
+    supportedNetworks: ['visa', 'masterCard', 'amex', 'discover'],
     total: {
       label: 'Car Collection: ' + item,
       type: 'final',
-      amaount: price
+      amount: price
     },
-    requiredBillingContactFields: ['postalAdress'],
+    requiredBillingContactFields: ['postalAddress'],
     requiredShippingContactFields: []
   };
-  const session = new ApplePlaySession(3, paymentRequest);
+
+  const session = new ApplePaySession(3, paymentRequest);
 
   session.onvalidatemerchant = function (event) {
     fetch('/validate-merchant', {
@@ -68,4 +69,3 @@ if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
   });
   console.log('Apple Pay is not available or device not configured');
 }
-
