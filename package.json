@@ -2,9 +2,13 @@
   "name": "cars",
   "version": "1.0.0",
   "description": "A front-end project detailing the history, models, and specifications of a particular car manufacturer.",
+
+  
   "scripts": {
+    
     "start": "node server.js",
-    "test": "jest"
+    "test": "jest",
+    "type": "module"
   },
   "keywords": [
     "car",
