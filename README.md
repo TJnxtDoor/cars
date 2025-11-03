@@ -35,7 +35,7 @@ run this in server.test.js or else it wont work
 ## NEEDS FIXING
 
  11/3/22
- - favicon icon isnt working and apple inttergration isnt working also due to apple not supoporting this device, it 
-  - can only be ran on apple device, 
+ - favicon icon isnt working and apple inttergration isnt working also due to apple not supoporting this device 
+  -  itcan only be ran on apple device, 
  
  
