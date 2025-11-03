@@ -1,4 +1,3 @@
-// this js is just a mock up simulation of apple pay
 if (!window.ApplePaySession) {
   class MockApplePaySession {
     constructor(version, request) {

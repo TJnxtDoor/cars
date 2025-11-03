@@ -29,8 +29,9 @@
   border-bottom: 1px solid #eee;
 }
 
-h1 {
+.h1 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
+  text-align: center;
 }
 
 #FR, #BG, #AM {
