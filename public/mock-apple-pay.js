@@ -8,6 +8,7 @@ if (!window.ApplePaySession) {
       this.oncancel = null;
     }
 
+
     begin() {
       console.log('Mock Apple Pay session started');
       setTimeout(() => {
@@ -36,5 +37,5 @@ if (!window.ApplePaySession) {
   }
 
   window.ApplePaySession = MockApplePaySession;
-  ApplePaySession.canMakePayments = () => true;
+  ApplePaySession.canMakePayments = () => CSSViewTransitionRule;
 }

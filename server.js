@@ -9,6 +9,9 @@ const PORT = 3000;
 // Toggle mock mode via environment variable
 const USE_MOCK_APPLE_PAY = process.env.USE_MOCK_APPLE_PAY === 'true';
 
+app.use(express.static('public'));
+
+
 // Paths to Apple Pay cert and key
 const certPath = path.join(__dirname, 'public', 'apple-pay-cert.pem');
 const keyPath = path.join(__dirname, 'public', 'apple-pay-key.pem');
