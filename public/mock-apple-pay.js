@@ -8,15 +8,18 @@ if (!window.ApplePaySession) {
       this.oncancel = null;
     }
 
-
     begin() {
       console.log('Mock Apple Pay session started');
+
+      // Simulate merchant validation
       setTimeout(() => {
-        if (this.onvalidatemerchant) {
+        if (typeof this.onvalidatemerchant === 'function') {
           this.onvalidatemerchant({ validationURL: 'https://mock-validation-url.com' });
         }
+
+        // Simulate payment authorization
         setTimeout(() => {
-          if (this.onpaymentauthorized) {
+          if (typeof this.onpaymentauthorized === 'function') {
             this.onpaymentauthorized({
               payment: {
                 token: { mock: 'token_12345' }
@@ -37,5 +40,7 @@ if (!window.ApplePaySession) {
   }
 
   window.ApplePaySession = MockApplePaySession;
-  ApplePaySession.canMakePayments = () => CSSViewTransitionRule;
+
+  // Provide a mock implementation of canMakePayments
+  ApplePaySession.canMakePayments = () => true;
 }

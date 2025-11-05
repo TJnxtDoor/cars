@@ -1,4 +1,3 @@
-// applepay-session.js
 
 // Only define a mock if ApplePaySession is not available
 if (typeof window.ApplePaySession === "undefined") {

@@ -1,4 +1,4 @@
-let applePayButtons = document.querySelectorAll('.apple-pay-button');
+const applePayButtons = document.querySelectorAll('.apple-pay-button');
 
 function initiateApplePay(event) {
   const item = event.target.dataset.item;
@@ -10,7 +10,7 @@ function initiateApplePay(event) {
     merchantCapabilities: ['supports3DS'],
     supportedNetworks: ['visa', 'masterCard', 'amex', 'discover'],
     total: {
-      label: 'Car Collection: ' + item,
+      label: `Car Collection: ${item}`,
       type: 'final',
       amount: price
     },
@@ -18,59 +18,74 @@ function initiateApplePay(event) {
     requiredShippingContactFields: []
   };
 
-  let session = new ApplePaySession(3, paymentRequest);
+  const session = new ApplePaySession(3, paymentRequest);
 
-  session.onvalidatemerchant = function (event) {
+  session.onvalidatemerchant = event => {
     fetch('/validate-merchant', {
       method: 'POST',
-      body: JSON.stringify({ validationURL: event.validationURL }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ validationURL: event.validationURL })
     })
       .then(res => res.json())
       .then(merchantSession => {
         session.completeMerchantValidation(merchantSession);
+      })
+      .catch(err => {
+        console.error('Merchant validation failed:', err);
+        session.abort();
       });
   };
 
-  session.onpaymentauthorized = function (event) {
+  session.onpaymentauthorized = event => {
     fetch('/process-payment', {
       method: 'POST',
-      body: JSON.stringify({ token: event.payment.token }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: event.payment.token })
     })
       .then(res => res.json())
       .then(result => {
-        if (result.success) {
-          session.completePayment(ApplePaySession.STATUS_SUCCESS);
-        } else {
-          session.completePayment(ApplePaySession.STATUS_FAILURE);
-        }
+        const status = result.success
+          ? ApplePaySession.STATUS_SUCCESS
+          : ApplePaySession.STATUS_FAILURE;
+        session.completePayment(status);
+      })
+      .catch(err => {
+        console.error('Payment processing failed:', err);
+        session.completePayment(ApplePaySession.STATUS_FAILURE);
       });
   };
 
-  session.oncancel = function () {
+  session.oncancel = () => {
     console.log('Apple Pay payment cancelled');
   };
 
   session.begin();
 }
+
 if (window.ApplePaySession) {
   ApplePaySession.canMakePaymentsWithActiveCard('merchant-identifier')
     .then(canMakePayments => {
-      if (canMakePayments) {
-        applePayButtons.forEach(button => {
+      applePayButtons.forEach(button => {
+        if (canMakePayments) {
           button.style.display = 'inline-block';
           button.style.setProperty('-webkit-appearance', '-apple-pay-button');
           button.style.setProperty('-apple-pay-button-type', 'buy');
           button.style.setProperty('-apple-pay-button-style', 'black');
           button.addEventListener('click', initiateApplePay);
-        });
-      } else {
-        applePayButtons.forEach(button => {
+        } else {
           button.style.display = 'none';
-        });
+        }
+      });
+
+      if (!canMakePayments) {
         console.log('Apple Pay is not available or no active card configured');
       }
+    })
+    .catch(err => {
+      console.error('Error checking Apple Pay availability:', err);
+      applePayButtons.forEach(button => {
+        button.style.display = 'none';
+      });
     });
 } else {
   applePayButtons.forEach(button => {

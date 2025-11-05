@@ -148,6 +148,33 @@
   <script src="apple-pay-session.js"></script>
   <script src="/applepay.js"></script>
   <script src="/mock-apple-pay.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=> {
+  fetch('/config/apple-pay')
+    .then(res => res.json())
+    .then(config => {
+      if (config.mockMode) {
+        const banner = document.createElement('div');
+        banner.textContent = '🧪 Apple Pay Mock Mode Active';
+        banner.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background: orange;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          padding: 8px;
+          z-index: 9999;
+          font-family: sans-serif;
+        `;
+        document.body.appendChild(banner);
+      }
+    });
+}, []);
+  </script>
+
 
 </body>
 
