@@ -1,5 +1,5 @@
 async function onApplePayButtonClicked() {
-    if (typeof PaymentRequest === "undefined") {
+    if (!window.PaymentRequest) {
         console.warn("PaymentRequest API is not available. Consider falling back to Apple Pay JS.");
         return;
     }
@@ -16,6 +16,8 @@ async function onApplePayButtonClicked() {
             }
         }];
 
+
+        document.getElementById('svg-logo').classList.remove('hidden');
         const paymentDetails = {
             total: {
                 label: "Demo (Card is not charged)",
@@ -28,13 +30,13 @@ async function onApplePayButtonClicked() {
             requestBillingAddress: false,
             requestPayerEmail: false,
             requestPayerPhone: false,
-            requestShipping: false,
-            shippingType: "shipping"
+            requestShipping: false
         };
 
         const request = new PaymentRequest(paymentMethodData, paymentDetails, paymentOptions);
 
-        request.onmerchantvalidation = async event => {
+        // Merchant validation
+        request.addEventListener("merchantvalidation", async event => {
             try {
                 const merchantSession = await validateMerchant();
                 event.complete(merchantSession);
@@ -42,9 +44,10 @@ async function onApplePayButtonClicked() {
                 console.error("Merchant validation failed:", err);
                 event.complete(null);
             }
-        };
+        });
 
-        request.onpaymentmethodchange = event => {
+        // Payment method change
+        request.addEventListener("paymentmethodchange", event => {
             const { methodDetails } = event;
 
             if (methodDetails?.type) {
@@ -57,6 +60,7 @@ async function onApplePayButtonClicked() {
                     displayItems: calculateDisplayItem(couponCode),
                     shippingOptions: calculateShippingOptions(couponCode),
                     modifiers: [{
+                        supportedMethods: "https://apple.com/apple-pay",
                         data: {
                             additionalShippingMethods: calculateShippingOptions(couponCode)
                         }
@@ -64,15 +68,7 @@ async function onApplePayButtonClicked() {
                     error: calculateError(couponCode)
                 });
             }
-        };
-
-        request.onshippingoptionchange = event => {
-            event.updateWith({ total: paymentDetails.total });
-        };
-
-        request.onshippingaddresschange = event => {
-            event.updateWith({}); // You can enhance this with address-based logic
-        };
+        });
 
         const response = await request.show();
         await response.complete("success");

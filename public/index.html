@@ -13,12 +13,11 @@
   <meta name="apple-mobile-web-app-title" content="Car Collection">
 
 </head>
-<script crossorigin src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js">
-</script>
-
 
 <body>
-
+  <svg id="svg-logo" viewBox="0 0 35 15"></svg>
+  <script src="https://applepay.cdn-apple.com/jsapi/v1.1.0/apple-pay-sdk.js" crossorigin async
+    data-initial-token="Your Apple Pay JS token"></script>
 
   <h1>Car Collection</h1>
   <div class="cars-container">
@@ -43,9 +42,9 @@
           Italian automotive engineering, offering breathtaking performance and stunning design.
         </p>
         <div class="payment-options">
-          <apple-pay-button buttonstyle="black" type="plain" locale="en-US"></apple-pay-button>
-        </div>
+          <apple-pay-button buttonstyle="black" type="buy" locale="el-GR" lang="el-GR"></apple-pay-button>
 
+        </div>
 
         </button>
       </div>
@@ -70,9 +69,8 @@
           The Bugatti Chiron redefines hypercar performance with its revolutionary
           engineering, unparalleled luxury, and record-breaking speed capabilities.
         </p>
-        <div class="payment-options">
-          <apple-pay-button buttonstyle="white" type="plain" locale="en-US"></apple-pay-button>
-        </div>
+<apple-pay-button buttonstyle="black" type="buy" locale="el-GR" lang="el-GR"></apple-pay-button>
+
       </div>
     </div>
 
@@ -95,12 +93,9 @@
           The iconic Aston Martin DB5, made famous by James Bond, represents British
           automotive elegance with its timeless design and superb craftsmanship from the golden age of motoring.
         </p>
-        <div class="payment-options">
-          <apple-pay-button buttonstyle="white-outline" type="plain" locale="en-US">Apple Pay</apple-pay-button>
         </div>
       </div>
     </div>
-  </div>
 
   </div>
 
