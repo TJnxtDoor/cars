@@ -13,8 +13,13 @@
   <meta name="apple-mobile-web-app-title" content="Car Collection">
 
 </head>
+<script crossorigin src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js">
+</script>
+
 
 <body>
+
+
   <h1>Car Collection</h1>
   <div class="cars-container">
 
@@ -38,10 +43,11 @@
           Italian automotive engineering, offering breathtaking performance and stunning design.
         </p>
         <div class="payment-options">
-          <button class="apple-pay-button" data-item="Ferrari" data-price="250000">
-            Buy with Apple Pay
-          </button>
+          <apple-pay-button buttonstyle="black" type="plain" locale="en-US"></apple-pay-button>
         </div>
+
+
+        </button>
       </div>
     </div>
 
@@ -64,9 +70,9 @@
           The Bugatti Chiron redefines hypercar performance with its revolutionary
           engineering, unparalleled luxury, and record-breaking speed capabilities.
         </p>
-        <button class="apple-pay-button" data-item="Bugatti" data-price="3000000">
-          Buy with Apple Pay
-        </button>
+        <div class="payment-options">
+          <apple-pay-button buttonstyle="white" type="plain" locale="en-US"></apple-pay-button>
+        </div>
       </div>
     </div>
 
@@ -90,90 +96,14 @@
           automotive elegance with its timeless design and superb craftsmanship from the golden age of motoring.
         </p>
         <div class="payment-options">
-          <button class="apple-pay-button" data-item="Aston Martin" data-price="1200000">
-            Buy with Apple Pay
-          </button>
+          <apple-pay-button buttonstyle="white-outline" type="plain" locale="en-US">Apple Pay</apple-pay-button>
         </div>
       </div>
     </div>
+  </div>
 
   </div>
 
-  <script>
-    function handleApplePay(button) {
-      const item = button.dataset.item;
-      const price = button.dataset.price;
-
-      if (!window.ApplePaySession || !ApplePaySession.canMakePayments()) {
-        console.log("Apple Pay is not available");
-        return;
-      }
-
-      const request = {
-        countryCode: 'US',
-        currencyCode: 'USD',
-        supportedNetworks: ['visa', 'masterCard', 'amex'],
-        merchantCapabilities: ['supports3DS'],
-        total: { label: item, amount: price }
-      };
-
-      const session = new ApplePaySession(3, request);
-
-      session.onvalidatemerchant = (event) => {
-        fetch('/validate-merchant', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ validationURL: event.validationURL })
-        })
-          .then(res => res.json())
-          .then(data => session.completeMerchantValidation(data));
-      };
-
-      session.onpaymentauthorized = (event) => {
-        // Send event.payment to your server
-        session.completePayment(ApplePaySession.STATUS_SUCCESS);
-        alert(`Payment successful for ${item}!`);
-      };
-
-      session.begin();
-    }
-
-    // Attach handler to all Apple Pay buttons
-    document.querySelectorAll('.apple-pay-button').forEach(btn => {
-      btn.addEventListener('click', () => handleApplePay(btn));
-    });
-  </script>
-
-  <script src="apple-pay-integration.js"></script>
-  <script src="apple-pay-session.js"></script>
-  <script src="/applepay.js"></script>
-  <script src="/mock-apple-pay.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=> {
-  fetch('/config/apple-pay')
-    .then(res => res.json())
-    .then(config => {
-      if (config.mockMode) {
-        const banner = document.createElement('div');
-        banner.textContent = '🧪 Apple Pay Mock Mode Active';
-        banner.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          background: orange;
-          color: white;
-          font-weight: bold;
-          text-align: center;
-          padding: 8px;
-          z-index: 9999;
-          font-family: sans-serif;
-        `;
-        document.body.appendChild(banner);
-      }
-    });
-}, []);
-  </script>
 
 
 </body>

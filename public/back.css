@@ -8,6 +8,14 @@
   align-items: start; 
 }
 
+apple-pay-button {
+  --apple-pay-button-width: 158px;
+  --apple-pay-button-height: 40px;
+  --apple-pay-button-border-radius: 65px;
+  --apple-pay-button-padding: 0px 0px;
+  --apple-pay-button-box-sizing: border-box;
+}
+
 .FR{
   width: 100%;
   object-fit: cover;
@@ -50,6 +58,7 @@
   gap: 10px;
   margin-top: 10px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .payment-options img {
@@ -57,8 +66,13 @@
   width: auto;
 }
 
-.apple-pay-button {
+.master-card-button:hover {
+  background-color: #333;
+}
+
+.master-card-button{
   flex: 1;
+  max-width: 140px;
   min-width: 140px;
   padding: 10px 16px;
   font-size: 1rem;
@@ -69,10 +83,6 @@
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease;
-}
-
-.apple-pay-button:hover {
-  background-color: #333;
 }
 
 
@@ -96,15 +106,3 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-/* @media (min-width: 768px) and (max-width: 1023px) {
-  .cars-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .cars-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-} */
