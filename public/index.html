@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Car Collection</title>
+  <link rel="stylesheet" href="/local/path/apple-pay-button.css">
   <link rel="stylesheet" href="back.css">
   <link rel="icom" href="/public/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -15,11 +16,11 @@
 </head>
 
 <body>
-  <svg id="svg-logo" viewBox="0 0 35 15"></svg>
+<script src="/js/payment.js"></script>
   <script src="https://applepay.cdn-apple.com/jsapi/v1.1.0/apple-pay-sdk.js" crossorigin async
-    data-initial-token="Your Apple Pay JS token"></script>
+    data-initial-token="Place your token here"></script>
 
-  <h1>Car Collection</h1>
+  <h1 id="title">Car Collection</h1>
   <div class="cars-container">
 
     <!-- Ferrari -->
@@ -41,8 +42,8 @@
           The Ferrari 488 GTB is a mid-engine sports car that represents the pinnacle of
           Italian automotive engineering, offering breathtaking performance and stunning design.
         </p>
-        <div class="payment-options">
-          <apple-pay-button buttonstyle="black" type="buy" locale="el-GR" lang="el-GR"></apple-pay-button>
+        <div class="apple-pay-btn-wrapper">
+<button class="apple-pay-button" type="button"> Apple Pay</button>
 
         </div>
 
@@ -69,8 +70,9 @@
           The Bugatti Chiron redefines hypercar performance with its revolutionary
           engineering, unparalleled luxury, and record-breaking speed capabilities.
         </p>
-<apple-pay-button buttonstyle="black" type="buy" locale="el-GR" lang="el-GR"></apple-pay-button>
-
+        <div class="apple-pay-btn-wrapper">
+          <button class="apple-pay-button"> Apple Pay</button>
+        </div>
       </div>
     </div>
 
@@ -93,14 +95,16 @@
           The iconic Aston Martin DB5, made famous by James Bond, represents British
           automotive elegance with its timeless design and superb craftsmanship from the golden age of motoring.
         </p>
+
+        <div class="apple-pay-btn-wrapper">
+          <button class="apple-pay-button"> Apple Pay</button>
+          <link rel="stylesheet" href="/local/path/apple-pay-button.css">
         </div>
       </div>
     </div>
-
   </div>
 
-
-
+  </div>
 </body>
 
 </html>
