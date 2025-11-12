@@ -28,12 +28,9 @@ run this in server.test.js or else it wont work
  - unit test passed for server.test.js
  - make sure to run npm start or do npm thne type start 
  - created apple pay moockup demo payment()
+ -  - installed and buidl a react app for cars
+  - all tests and no erros when debugging testing serve test and react app test all validated 
 
 ## NEEDS FIXING
 
- 11/3/22
-  - favicon icon isnt working and apple inttergration isnt working also due to apple not supoporting this device 
-  - it can only be ran on apple device, 
-  - installed and buidl a react app for cars
-  - all tests and no erros when debugging testing serve test and react app test all validated 
  
