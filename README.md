@@ -30,7 +30,6 @@ run this in server.test.js or else it wont work
  - fixed issues where the website couldnt load images and text orginized files into folders 
  - all api keys are hidden 
  - unit test passed for server.test.js
- - make sure to run npm start or do npm thne type start 
  - created apple pay moockup demo payment()
  - installed and build a react app for cars
   - all tests and no erros when debugging testing serve test and react app test all validated 
