@@ -36,4 +36,3 @@ run this in server.test.js or else it wont work
   - it can only be ran on apple device, 
   - installed and buidl a react app for cars
   - all tests and no erros when debugging testing serve test and react app test all validated 
- 

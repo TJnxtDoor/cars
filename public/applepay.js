@@ -30,8 +30,9 @@ async function onApplePayButtonClicked() {
             "total": {
                 "label": "Demo (Card is not charged)",
                 "amount": {
-                    "value": "27.50",
-                    "currency": "USD"
+                    "value": '${TOTAL_AMOUNT}',
+                    "currency": "USD",
+                    "currency": "GBP"
                 }
             }
         };

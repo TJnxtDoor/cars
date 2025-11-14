@@ -15,6 +15,8 @@ return (
   );
 }
 export default paymentinfo;
+document.getElementById('apple-pay-button');
+  button.addEventListener('click', onApplePayButtonClicked);
 
-
-79
+async function onApplePayButtonClicked() {
+}
