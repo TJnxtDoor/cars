@@ -9,7 +9,7 @@ body {
 .cars-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px; 
+  padding: 40px 20px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -33,6 +33,13 @@ body {
   }
 }
 
+.year {
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+  width: fit-content;
+  height: fit-content;
+  color: green;
+}
+
 /* Car image */
 .car-section img {
   width: 100%;
@@ -43,14 +50,17 @@ body {
 }
 
 /* Headings */
-.h1, #title {
+.h1,
+#title {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   text-align: center;
   margin-top: 40px;
 }
 
 /* Car labels */
-#FR, #BG, #AM {
+#FR,
+#BG,
+#AM #TY {
   font-size: clamp(1.2rem, 2.5vw, 1.75rem);
   width: fit-content;
   height: fit-content;
@@ -77,6 +87,7 @@ body {
   height: 30px;
   width: auto;
 }
+
 /* Apple Pay buttons */
 #apple-pay-logo {
   height: 20px;
@@ -106,7 +117,7 @@ body {
 
 .pay-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .pay-btn.apple {
@@ -125,9 +136,10 @@ body {
   border: none;
   cursor: pointer;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  transition:  0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
 }
+
 .apple-pay-button:hover {
   background-color: #333;
 }

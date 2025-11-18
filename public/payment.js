@@ -12,10 +12,10 @@ async function onApplePayButtonClicked() {
                 merchantIdentifier: "merchant.com.apdemo",
                 merchantCapabilities: ["supports3DS"],
                 supportedNetworks: ["amex", "discover", "masterCard", "visa"],
-                countryCode: "US"
+                countryCode: "US",
+
             }
         }];
-
 
         document.getElementById('svg-logo').classList.remove('hidden');
         const paymentDetails = {
