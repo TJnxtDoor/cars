@@ -1,2 +1,2 @@
 const crypto = require('crypto');
-const 
+const { Module } = require('../module');
