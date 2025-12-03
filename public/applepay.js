@@ -1,110 +1,96 @@
 async function onApplePayButtonClicked() {
+  if (!window.PaymentRequest) {
+    console.warn("Payment Request API is not supported in this browser.");
+    return;
+  }
 
-    // Consider falling back to Apple Pay JS if Payment Request is not available.
-    if (!PaymentRequest) {
-        return;
-    }
+  try {
+    const TOTAL_AMOUNT = "99.99";
 
-    try {
+    // Define supported payment methods
+    const paymentMethodData = [{
+      supportedMethods: "https://apple.com/apple-pay",
+      data: {
+        version: 3,
+        merchantIdentifier: "merchant.com.apdemo",
+        merchantCapabilities: ["supports3DS"],
+        supportedNetworks: ["amex", "discover", "masterCard", "visa"],
+        countryCode: "US"
+      }
+    }];
 
-        // Define PaymentMethodData
-        const paymentMethodData = [{
-            "supportedMethods": "https://apple.com/apple-pay",
-            "data": {
-                "version": 3,
-                "merchantIdentifier": "merchant.com.apdemo",
-                "merchantCapabilities": [
-                    "supports3DS"
-                ],
-                "supportedNetworks": [
-                    "amex",
-                    "discover",
-                    "masterCard",
-                    "visa"
-                ],
-                "countryCode": "US"
-            }
-        }];
-        // Define PaymentDetails
-        const paymentDetails = {
-            "total": {
-                "label": "Demo (Card is not charged)",
-                "amount": {
-                    "value": '${TOTAL_AMOUNT}',
-                    "currency": "USD",
-                    "currency": "GBP"
-                }
-            }
-        };
-        // Define PaymentOptions
-        const paymentOptions = {
-            "requestPayerName": true,
-            "requestBillingAddress": true,
-            "requestPayerEmail": true,
-            "requestPayerPhone": true,
-            "requestShipping": true,
-            "shippingType": "shipping"
-        };
+    // Define payment details
+    const paymentDetails = {
+      total: {
+        label: "Demo (Card is not charged)",
+        amount: {
+          value: TOTAL_AMOUNT,
+          currency: "USD"
+        }
+      }
+    };
 
-        // Create PaymentRequest
-        const request = new PaymentRequest(paymentMethodData, paymentDetails, paymentOptions);
+    // Define payment options
+    const paymentOptions = {
+      requestPayerName: true,
+      requestBillingAddress: true,
+      requestPayerEmail: true,
+      requestPayerPhone: true,
+      requestShipping: true,
+      shippingType: "shipping"
+    };
 
-        request.onmerchantvalidation = event => {
-            // Call your own server to request a new merchant session.
-            const merchantSessionPromise = validateMerchant();
-            event.complete(merchantSessionPromise);
-        };
+    // Create the PaymentRequest instance
+    const request = new PaymentRequest(paymentMethodData, paymentDetails, paymentOptions);
 
-        request.onpaymentmethodchange = event => {
-            if (event.methodDetails.type !== undefined) {
-                // Define PaymentDetailsUpdate based on the selected payment method.
-                // No updates or errors needed, pass an object with the same total.
-                const paymentDetailsUpdate = {
-                    'total': paymentDetails.total
-                };
-                event.updateWith(paymentDetailsUpdate);
-            } else if (event.methodDetails.couponCode !== undefined) {
-                // Define PaymentDetailsUpdate based on the coupon code.
-                const total = calculateTotal(event.methodDetails.couponCode);
-                const displayItems = calculateDisplayItem(event.methodDetails.couponCode);
-                const shippingOptions = calculateShippingOptions(event.methodDetails.couponCode);
-                const error = calculateError(event.methodDetails.couponCode);
+    // Merchant validation handler
+    request.onmerchantvalidation = event => {
+      const merchantSessionPromise = validateMerchant(); // Implement this on your server
+      event.complete(merchantSessionPromise);
+    };
 
-                event.updateWith({
-                    total: total,
-                    displayItems: displayItems,
-                    shippingOptions: shippingOptions,
-                    modifiers: [
-                        {
-                            data: {
-                                additionalShippingMethods: shippingOptions,
-                            },
-                        },
-                    ],
-                    error: error,
-                });
-            }
-        };
+    // Payment method change handler
+    request.onpaymentmethodchange = event => {
+      if (event.methodDetails?.type) {
+        event.updateWith({ total: paymentDetails.total });
+      } else if (event.methodDetails?.couponCode) {
+        const total = calculateTotal(event.methodDetails.couponCode);
+        const displayItems = calculateDisplayItem(event.methodDetails.couponCode);
+        const shippingOptions = calculateShippingOptions(event.methodDetails.couponCode);
+        const error = calculateError(event.methodDetails.couponCode);
 
-        request.onshippingoptionchange = event => {
-            // Define PaymentDetailsUpdate based on the selected shipping option.
-            // No updates or errors needed, pass an object with the same total.
-            const paymentDetailsUpdate = {
-                'total': paymentDetails.total
-            };
-            event.updateWith(paymentDetailsUpdate);
-        };
+        event.updateWith({
+          total,
+          displayItems,
+          shippingOptions,
+          modifiers: [{
+            data: { additionalShippingMethods: shippingOptions }
+          }],
+          error
+        });
+      }
+    };
 
-        request.onshippingaddresschange = event => {
-            // Define PaymentDetailsUpdate based on a shipping address change.
-            const paymentDetailsUpdate = {};
-            event.updateWith(paymentDetailsUpdate);
-        };
+    // Shipping option change handler (modern syntax)
+    request.addEventListener("shippingoptionchange", event => {
+      event.updateWith({
+        total: {
+          label: "Demo (Card is not charged)",
+          amount: {
+            value: TOTAL_AMOUNT,
+            currency: "USD"
+          }
+        }
+      });
+    });
 
-        const response = await request.show();
-        const status = "success";
-        await response.complete(status);
-    } catch (e) {
-        // Handle errors
-    }
+    // Show the Apple Pay sheet
+    const response = await request.show();
+    await response.complete("success");
+
+    // Handle the response (e.g., send to backend)
+    console.log("Payment successful:", response);
+  } catch (e) {
+    console.error("Apple Pay failed:", e);
+  }
 }

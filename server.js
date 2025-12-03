@@ -48,3 +48,27 @@ if (useHttps) {
 
 // Logs
 console.log(`Using HTTPS: ${useHttps}`);
+
+// intergration for apple pay /pursue payment
+const { v4: uuidv4 } = require('uuid');
+const purchases = [];
+
+app.post('/api/purchase', (req, res) => {
+  const { payerName, payerEmail, carModel, amount } = req.body;
+
+  const trackingNumber = `CAR-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+  const purchase = {
+    id: uuidv4(),
+    payerName,
+    payerEmail,
+    carModel,
+    amount,
+    currency: 'USD',
+    trackingNumber,
+    status: 'completed',
+    timestamp: new Date().toISOString()
+  };
+
+  purchases.push(purchase);
+  res.json({ success: true, trackingNumber });
+});
