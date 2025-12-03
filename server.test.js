@@ -18,17 +18,17 @@ describe('Car Collection App', () => {
   test('GET /dev returns HTML with Aston Martin', async () => {
     const res = await request(app).get('/dev');
     expect(res.text).toContain('Aston Martin DB5');
-    expect(res.text).toMatch(/\$1,?200,?000/);
+    expect(res.text).toContain('$1,200,000');
   });
 
   test('Static CSS is served', async () => {
     const res = await request(app).get('/back.css');
     expect(res.statusCode).toBe(200);
-    expect(res.headers['content-type']).toMatch(/css/);
+    expect(res.headers['content-type']).toMatch(/text\/css/);
   });
 
   test('Unknown route returns 404', async () => {
     const res = await request(app).get('/not-a-real-page');
-    expect(res.statusCode);
+    expect(res.statusCode).toBe(404);
   });
 });

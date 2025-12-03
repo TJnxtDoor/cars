@@ -4,7 +4,7 @@ async function onApplePayButtonClicked() {
     if (!PaymentRequest) {
         return;
     }
-    
+
     try {
 
         // Define PaymentMethodData
@@ -38,23 +38,23 @@ async function onApplePayButtonClicked() {
         };
         // Define PaymentOptions
         const paymentOptions = {
-            "requestPayerName": false,
-            "requestBillingAddress": false,
-            "requestPayerEmail": false,
-            "requestPayerPhone": false,
-            "requestShipping": false,
+            "requestPayerName": true,
+            "requestBillingAddress": true,
+            "requestPayerEmail": true,
+            "requestPayerPhone": true,
+            "requestShipping": true,
             "shippingType": "shipping"
         };
-        
+
         // Create PaymentRequest
         const request = new PaymentRequest(paymentMethodData, paymentDetails, paymentOptions);
-            
+
         request.onmerchantvalidation = event => {
             // Call your own server to request a new merchant session.
             const merchantSessionPromise = validateMerchant();
             event.complete(merchantSessionPromise);
         };
-        
+
         request.onpaymentmethodchange = event => {
             if (event.methodDetails.type !== undefined) {
                 // Define PaymentDetailsUpdate based on the selected payment method.
@@ -69,7 +69,7 @@ async function onApplePayButtonClicked() {
                 const displayItems = calculateDisplayItem(event.methodDetails.couponCode);
                 const shippingOptions = calculateShippingOptions(event.methodDetails.couponCode);
                 const error = calculateError(event.methodDetails.couponCode);
-        
+
                 event.updateWith({
                     total: total,
                     displayItems: displayItems,
@@ -85,7 +85,7 @@ async function onApplePayButtonClicked() {
                 });
             }
         };
-    
+
         request.onshippingoptionchange = event => {
             // Define PaymentDetailsUpdate based on the selected shipping option.
             // No updates or errors needed, pass an object with the same total.
@@ -94,13 +94,13 @@ async function onApplePayButtonClicked() {
             };
             event.updateWith(paymentDetailsUpdate);
         };
-    
+
         request.onshippingaddresschange = event => {
             // Define PaymentDetailsUpdate based on a shipping address change.
             const paymentDetailsUpdate = {};
             event.updateWith(paymentDetailsUpdate);
         };
-    
+
         const response = await request.show();
         const status = "success";
         await response.complete(status);

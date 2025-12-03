@@ -9,8 +9,10 @@ function initializeApplePay() {
         }
     });
 
-
     async function initiateApplePayPayment() {
+
+        // Native iOS PKAutomaticReloadPaymentRequest API
+        let automaticReloadPaymentRequest = null;
         try {
             const paymentMethodData = [{
                 supportedMethods: "https://apple.com/apple-pay",
@@ -30,9 +32,11 @@ function initializeApplePay() {
                     amount: { value: "${null}", currency: "USD" }
                 }
             };
+            console.log('Payment Charged ', paymentDetails);
         }
         catch (error) {
-            console.error('Error setting up payment request:', error);
+            
+            console.error('Error setting up payment request:', error)
         }    
     }
 }

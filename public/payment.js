@@ -21,16 +21,19 @@ async function onApplePayButtonClicked() {
         const paymentDetails = {
             total: {
                 label: "Demo (Card is not charged)",
-                amount: { value: "27.50", currency: "USD" }
+                amount: { value:"${TOTAL_AMOUNT}", currency: "USD" }
+                
             }
         };
 
         const paymentOptions = {
-            requestPayerName: false,
-            requestBillingAddress: false,
-            requestPayerEmail: false,
-            requestPayerPhone: false,
-            requestShipping: false
+            requestPayerName: true,
+            requestBillingAddress: true,
+            requestPayerEmail: true,
+            requestPayerPhone: true,
+            requestShipping: true,
+            shippingType: "shipping",
+            requestShippingOption: true
         };
 
         const request = new PaymentRequest(paymentMethodData, paymentDetails, paymentOptions);
