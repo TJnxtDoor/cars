@@ -1,7 +1,4 @@
 async function onApplePayButtonClicked() {
-
-
-
     await response.complete("success");
 
 // Send purchase to backend

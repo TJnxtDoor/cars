@@ -7,7 +7,7 @@
 
 */
 
-b/* Base styles */
+/* Base styles */
 body {
   margin: 0;
   padding: 0;
@@ -44,6 +44,8 @@ body.dark-mode .apple-pay-button {
   align-items: start;
 }
 
+
+
 /* Title styling */
 .title {
   font-size: 7rem;
@@ -56,29 +58,6 @@ body.dark-mode .apple-pay-button {
   align-items: center;
 }
 
-/* Intro animation */
-@keyframes fadeInZoom {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Car section animation */
-.car-section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.car-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* Responsive grid */
 @media (min-width: 768px) and (max-width: 1023px) {
