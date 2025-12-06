@@ -1,12 +1,5 @@
 
 
-/* fixed typo of keyframes  
-- removed duplicated .payment-button
-- imporoved animation transform consistency
-- added dark mode
-
-*/
-
 /* Base styles */
 body {
   margin: 0;
@@ -31,6 +24,11 @@ body.dark-mode .car-section {
 body.dark-mode .apple-pay-button {
   background-color: #f0f0f0;
   color: #000;
+}
+
+.Buggati {
+  color: #ff0000;
+  text-decoration: none;
 }
 
 /* Container layout */
@@ -102,85 +100,4 @@ body.dark-mode .apple-pay-button {
   height: fit-content;
 }
 
-.price {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-}
 
-/* Payment options */
-.payment-options {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.payment-options img {
-  height: 30px;
-  width: auto;
-}
-
-/* Apple Pay logo */
-#apple-pay-logo {
-  height: 20px;
-  width: auto;
-  display: block;
-  margin: 0 auto;
-  background-color: white;
-}
-
-/* Payment buttons */
-.payment-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.pay-btn {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.pay-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.pay-btn.apple {
-  background: black;
-  color: white;
-}
-
-/* Apple Pay button */
-.apple-pay-button {
-  background-color: black;
-  color: white;
-  font-size: 17px;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  transition: 0.3s ease;
-}
-
-.apple-pay-button:hover {
-  background-color: #333;
-}
-
-/* Payment method icons */
-.payment-methods {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 10px;
-}

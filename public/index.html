@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +12,11 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Car Collection" />
-  <meta name="description" content="Explore our exclusive collection of high-performance cars available for purchase with Apple Pay." />
+  <meta name="description"
+    content="Explore our exclusive collection of high-performance cars available for purchase with Apple Pay." />
   <meta name="keywords" content="Cars, Ferrari, Bugatti, Aston Martin, Apple Pay, High-Performance Cars, Luxury Cars" />
   <meta name="TJ" content="Car Collection Inc." />
- <style>
+  <style>
     body {
       margin: 0;
       background-color: black;
@@ -39,6 +41,7 @@
         transform: scale(0.5);
         filter: blur(10px);
       }
+
       100% {
         opacity: 1;
         transform: scale(1);
@@ -92,38 +95,31 @@
       cursor: pointer;
     }
   </style>
+
 </head>
 
 <body>
-  <!-- Scroll Triggered Animation-->
-  <script>
-      const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.car-section').forEach(section => {
-    observer.observe(section);
-  });
 
   </script>
   <script src="/js/payment.js"></script>
-  <script src="https://applepay.cdn-apple.com/jsapi/v1.1.0/apple-pay-sdk.js" crossorigin async data-initial-token="Place your token here"></script>
+  <script src="https://applepay.cdn-apple.com/jsapi/v1.1.0/apple-pay-sdk.js" crossorigin async
+    data-initial-token="Place your token here"></script>
 
-  <div class="intro-text">C</div>
+  <div class="intro-text">Car Collection
+    <div class="Fade-in-text"></div>
+  </div>
   <script>
-    const audio = new Audio('img/car sound.mp3');
+    const audio = new Audio('null'); // Replace 'null' with the path to your audio file
     audio.play();
     setTimeout(() => {
-      document.querySelector('.intro-text').textContent = 'CAR COLLECTION';
+      document.querySelector('.intro-text').textContent = 'Car Collection';
     }, 2000);
-  </script>
- 
+    setTimeout(() => {
+      document.querySelector('.fade-in-text').style.display = 'none';
+    }, 5000);
 
+  </script>
   <div class="cars-container">
 
     <!-- Ferrari -->
@@ -138,10 +134,9 @@
         <li><strong>0-60 mph:</strong> 3.0 seconds</li>
         <li><strong>Top Speed:</strong> 205 mph</li>
       </ul>
-      <p>The Ferrari 488 GTB is a mid-engine sports car that represents the pinnacle of Italian automotive engineering.</p>
-      <div class="apple-pay-btn-wrapper">
-        <button class="apple-pay-button">Apple Pay</button>
-      </div>
+      <p>The Ferrari 488 GTB is a mid-engine sports car that represents the pinnacle of Italian automotive engineering.
+      </p>
+      
     </div>
 
     <!-- Toyota -->
@@ -157,9 +152,7 @@
         <li><strong>Top Speed:</strong> 155 mph</li>
       </ul>
       <p>The Toyota Supra is a legendary sports car known for its exceptional handling and iconic design.</p>
-      <div class="apple-pay-btn-wrapper">
-        <button class="apple-pay-button">Apple Pay</button>
-      </div>
+     
     </div>
 
     <!-- Bugatti -->
@@ -175,32 +168,34 @@
         <li><strong>Top Speed:</strong> 261 mph (limited)</li>
       </ul>
       <p>The Bugatti Chiron redefines hypercar performance with revolutionary engineering and record-breaking speed.</p>
-      <div class="apple-pay-btn-wrapper">
-        <button class="apple-pay-button">Apple Pay</button>
+      <div class="where-buy">
+        <p class="whre-to-buy">
+          <br>
+          <strong>Where to Buy:</strong>
+          <br>
+          <a  class="Buggati"href="https://www.jamesedition.com/cars/bugatti/chiron">JamesEdition</a>
+        </p>
       </div>
     </div>
 
     <!-- Aston Martin -->
     <div class="car-section" style="--delay: 0.9s">
-      <img src="img/Austin Martin.jpg" alt="Aston Martin DB5"/>
+      <img src="img/Austin Martin.jpg" alt="Aston Martin DB5" />
       <div class="slideshow-container">
-
- 
-
-      <p><strong>Aston Martin DB5</strong></p>
-      <div class="price">$1,200,000</div>
-      <ul>
-        <li><strong>Engine:</strong> 4.0-liter inline-6</li>
-        <li><strong>Horsepower:</strong> 282 hp</li>
-        <li><strong>Drive:</strong> Rear-wheel drive</li>
-        <li><strong>0-60 mph:</strong> 8.0 seconds</li>
-        <li><strong>Top Speed:</strong> 145 mph</li>
-      </ul>
-      <p>The iconic Aston Martin DB5, made famous by James Bond, represents British automotive elegance.</p>
-      <div class="apple-pay-btn-wrapper">
-        <button class="apple-pay-button">Apple Pay</button>
+        <p><strong>Aston Martin DB5</strong></p>
+        <div class="price">$1,200,000</div>
+        <ul>
+          <li><strong>Engine:</strong> 4.0-liter inline-6</li>
+          <li><strong>Horsepower:</strong> 282 hp</li>
+          <li><strong>Drive:</strong> Rear-wheel drive</li>
+          <li><strong>0-60 mph:</strong> 8.0 seconds</li>
+          <li><strong>Top Speed:</strong> 145 mph</li>
+        </ul>
+        <p>The iconic Aston Martin DB5, made famous by James Bond, represents British automotive elegance.</p>
+       
+        </div>
       </div>
     </div>
-  </div>
 </body>
+
 </html>
