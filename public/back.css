@@ -26,10 +26,20 @@ body.dark-mode .apple-pay-button {
   color: #000;
 }
 
-.Buggati {
-  color: #ff0000;
+#Buggati, 
+#ferrari,
+#AstonMartin,
+#Toyota {
+  color: white;
   text-decoration: none;
+  text-align: right, justify;
+
 }
+:hover a clicked {
+  text-decoration: underline;
+  color: red;
+}
+
 
 /* Container layout */
 .cars-container {
