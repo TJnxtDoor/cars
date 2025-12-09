@@ -8,8 +8,17 @@ body {
   background-color: #57f0cf;
   color: #000;
   transition: background-color 0.3s ease, color 0.3s ease;
+  
 }
 
+
+header {
+  background-repeat: repeat;
+  background-size: cover;
+  background-size: cover;
+  background-color: transparent;
+  background-clip: inherit;
+}
 /* Dark mode */
 body.dark-mode {
   background-color: #121212;
@@ -35,11 +44,19 @@ body.dark-mode .apple-pay-button {
   text-align: right, justify;
 
 }
-:hover a clicked {
+:hover a  {
   text-decoration: underline;
   color: red;
 }
 
+
+.specs {
+  padding: 0%;
+  margin: 0%;
+  list-style-type: 'dot';
+  background: transparent 3s hover;
+  
+}
 
 /* Container layout */
 .cars-container {
@@ -84,6 +101,10 @@ body.dark-mode .apple-pay-button {
   }
 }
 
+
+.ferarri {
+  text-align: center;
+}
 /* Car image */
 .car-section img {
   width: 100%;
